@@ -1,6 +1,6 @@
 # intro-to-vue
 
-Notes and files from working through "Intro to Vue" on [vuemastery.com]
+Notes and files from working through "Intro to Vue" on (vuemastery.com)
 
 ---
 
@@ -79,9 +79,13 @@ To display things conditionally, use these vue directives:
   ```
 
 Render iteratively with `v-for`
+
   ex: `<li v-for="detail in details">{{ detail }}</li>`
+
   or: `<li v-for="(detail, index) in details">{{ index }}: {{ detail }}</li>`
+
   or: `<li v-for="n in 10">{{ n }}</li>`
+
   or:
   ```
   <li v-for="(name, value, index) in hashedDetails">
@@ -98,6 +102,7 @@ Render iteratively with `v-for`
 Add event listeners to an element with `v-on:{event}` (shorthand `@{event}`)
 
 ex: `<button @click="doAThing">Do thing.</button>`
+
 or: `<button v-on:mouseover="doAThing">Do thing.</button>`
 
 
