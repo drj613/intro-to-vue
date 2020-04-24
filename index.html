@@ -7,7 +7,6 @@
   <title>Document</title>
 
   <script src="https://unpkg.com/vue"></script>
-  <script type="text/javascript" src="main.js"></script>
 </head>
 <body>
   <div id="app">
@@ -18,18 +17,27 @@
 
       <div class="product-info">
         <h1>{{ product }}</h1>
+
         <div class="variations">
           <div v-for="size in sizes">
             <span class="size">{{ size }}</span>
           </div>
           <div v-for="variant in variants" :key="variant.variantId">
-            <span class="color">{{ variant.variantColor }}</span>
+            <span class="color" @mouseover="updateProduct(variant.variantImage)">
+              {{ variant.variantColor }}
+            </span>
           </div>
         </div>
+
         <h2>{{ description }}</h2>
+
+        <button @click="addToCart">Add to cart</button>
+        <button @click="removeFromCart">Remove from cart</button>
+
         <ul>
           <li v-for="detail in details"> {{detail }}</li>
         </ul>
+
         <p v-if="inventory > 10">In Stock</p>
         <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out!</p>
         <p v-else>Out of stock</p>
@@ -37,7 +45,11 @@
       </div>
     </div>
 
+  <div class="cart">
+    <p>Cart ({{ cart }})</p>
+  </div>
 
   </div>
 </body>
+<script type="text/javascript" src="main.js"></script>
 </html>
