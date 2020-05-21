@@ -111,3 +111,10 @@ or: `<button v-on:mouseover="doAThing">Do thing.</button>`
 
 - The Vue instance is the root of every Vue application
 - The Vue instance plugs into an element in the DOM
+- Data can be bound to an element's `style` and `class` attributes
+
+```
+<div class="color-box" :style="{ backgroundColor: variant.variantColor }"></div>
+
+<button @click="addToCart" :disabled="!inStock" :class="{ disabledButton: !inStock }">Add to cart</button>
+```

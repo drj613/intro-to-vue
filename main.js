@@ -7,17 +7,18 @@ let app = new Vue({
     variants: [
       {
         variantId: 2234,
-        variantColor: "Green",
+        variantColor: "green",
         variantImage: "./assets/vm-socks-green.png"
       },
       {
         variantId: 2235,
-        variantColor: "Blue",
+        variantColor: "blue",
         variantImage: "./assets/vm-socks-blue.png"
       }
     ],
     sizes: ["Small", "Medium", "Large"],
     image: "./assets/vm-socks-green.png",
+    inStock: true,
     altText: "A pair of socks",
     href: "#",
     inventory: 100,
