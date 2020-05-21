@@ -25,7 +25,8 @@ For the following examples, we'll use this app:
 let app = new vue({
     el: "#app",
     data: {
-      product: "socks"
+      brand: "Vue Mastery",
+      product: "socks",
       image: "./path-to-image.jpg",
       details: ["80% cotton", "20% polyester", "Gender-neutral"],
       inventory: 10,
@@ -39,6 +40,11 @@ let app = new vue({
     methods: {
       doAThing() {
         console.log("hi")
+      }
+    },
+    computed: {
+      title(){
+        return this.brand + ' ' + this.product
       }
     }
   });

@@ -5,56 +5,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-
+  <link rel="stylesheet" href="./style.css">
   <script src="https://unpkg.com/vue"></script>
 </head>
 <body>
   <div id="app">
+    <div class="nav-bar">
+      <div class="cart">
+        <a href="#"><span>Cart ({{ cart }})</span></a>
+      </div>
+    </div>
+
     <div class="product">
       <div class="product-image">
-        <a :href="href"><img :src="image" :alt="altText" /></a>
+        <img :src="image" :alt="altText" />
       </div>
 
       <div class="product-info">
-        <h1>{{ product }}</h1>
+        <h1>{{ title }}</h1>
+        <h2>{{ description }}</h2>
+
+        <div class="stock-sale-info">
+          <span v-if="inStock >= 10">In Stock</span>
+          <span v-else-if="inStock < 10 && inStock > 0">Almost sold out!</span>
+          <span v-else :class="{ outOfStock: !inStock }">Out of stock</span>
+          <span class="sale-span">{{ onSale }}</span>
+        </div>
+        <ul>
+          <li v-for="detail in details"> {{ detail }}</li>
+        </ul>
 
         <div class="variations">
           <div v-for="size in sizes">
             <span class="size">{{ size }}</span>
           </div>
-          <div class="color-box"
-          v-for="variant in variants"
-          :key="variant.variantId"
-          :style="{ backgroundColor: variant.variantColor }"
-          @mouseover="updateProduct(variant.variantImage)">
-            <span class="color">
-              {{ variant.variantColor }}
-            </span>
+          <div class="variants-container">
+            <div v-for="(variant, index) in variants"
+                 :key="variant.variantId"
+                 class="color-box"
+                 :style="{ backgroundColor: variant.variantColor }"
+                 @mouseover="updateProduct(index)">
+            </div>
           </div>
         </div>
 
-        <h2>{{ description }}</h2>
-
         <button @click="addToCart"
                 :disabled="!inStock"
-                :class="{ disabledButton: !inStock }">Add to cart</button>
-        <button @click="removeFromCart">Remove from cart</button>
+                :class="{ disabledButton: !inStock }"
+                class="add-to-cart">
+          Add to cart
+        </button>
 
-        <ul>
-          <li v-for="detail in details"> {{detail }}</li>
-        </ul>
-
-        <p v-if="inventory > 10">In Stock</p>
-        <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out!</p>
-        <p v-else>Out of stock</p>
-        <p v-show="onSale">This item is on sale!</p>
       </div>
     </div>
-
-  <div class="cart">
-    <p>Cart ({{ cart }})</p>
-  </div>
-
   </div>
 </body>
 <script type="text/javascript" src="main.js"></script>
