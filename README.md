@@ -13,7 +13,8 @@ new vue({
   el: "#element",
   data: {},
   props: {},
-  methods: {}
+  methods: {},
+  computed: {}
 });
 ```
 
@@ -124,3 +125,63 @@ or: `<button v-on:mouseover="doAThing">Do thing.</button>`
 
 <button @click="addToCart" :disabled="!inStock" :class="{ disabledButton: !inStock }">Add to cart</button>
 ```
+
+---
+
+## Computed Attributes
+
+When we want to compute data for a Vue component, we add a `computed` attribute to the Vue object, and fill that with our methods
+
+Compute methods can be referenced like data or props, simply by referring to the method name
+
+---
+
+## Components
+
+Components are initialized like so:
+
+```
+Vue.component('product', {
+  template: `your html here`,
+  data() {
+    return {
+      product: 'Socks',
+      brand: 'Vue Mastery',
+      ...
+    }
+  },
+  methods: {},
+  computed: {}
+  })`
+```
+
+A component must contain only _one_ element. There can be more elements nested within it, but you can not return two separate elements from a component.
+
+Unlike for the main Vue instance, `data` is a _function_ for components. This function will return a data object that is specific to that component. We will often want to reuse components, and if we didn't structure `data` this way, all components would share the same data. Every single product would have the same images, colors, sizes, etc.
+
+Once a component is initialized, it can be rendered to the DOM as if you were adding any other element to your HTML:
+
+`<product></product>`
+
+**Props** can be passed into a component from a parent element like so:
+
+```
+Vue.component('product', {
+  props: {
+    user: {
+      type: Object,
+      required: true
+    }
+  }
+})
+```
+
+When this is done, the prop also needs to be passed into the component in the HTML:
+
+```
+<div id="app">
+  <product :user="user"></product>
+</div>
+```
+
+_**You should not mutate props inside your child components**_

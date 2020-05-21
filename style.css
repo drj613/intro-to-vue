@@ -48,6 +48,9 @@ body {
   flex-direction: column;
 }
 
+.stock-sale-info {
+
+}
 .sale-span {
   margin-left: 1em;
   color: red;

@@ -16,48 +16,8 @@
       </div>
     </div>
 
-    <div class="product">
-      <div class="product-image">
-        <img :src="image" :alt="altText" />
-      </div>
+  <product :user="user"></product>
 
-      <div class="product-info">
-        <h1>{{ title }}</h1>
-        <h2>{{ description }}</h2>
-
-        <div class="stock-sale-info">
-          <span v-if="inStock >= 10">In Stock</span>
-          <span v-else-if="inStock < 10 && inStock > 0">Almost sold out!</span>
-          <span v-else :class="{ outOfStock: !inStock }">Out of stock</span>
-          <span class="sale-span">{{ onSale }}</span>
-        </div>
-        <ul>
-          <li v-for="detail in details"> {{ detail }}</li>
-        </ul>
-
-        <div class="variations">
-          <div v-for="size in sizes">
-            <span class="size">{{ size }}</span>
-          </div>
-          <div class="variants-container">
-            <div v-for="(variant, index) in variants"
-                 :key="variant.variantId"
-                 class="color-box"
-                 :style="{ backgroundColor: variant.variantColor }"
-                 @mouseover="updateProduct(index)">
-            </div>
-          </div>
-        </div>
-
-        <button @click="addToCart"
-                :disabled="!inStock"
-                :class="{ disabledButton: !inStock }"
-                class="add-to-cart">
-          Add to cart
-        </button>
-
-      </div>
-    </div>
   </div>
 </body>
 <script type="text/javascript" src="main.js"></script>
