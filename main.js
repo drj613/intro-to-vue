@@ -40,12 +40,20 @@ Vue.component('product', {
         </div>
       </div>
 
-      <button @click="addToCart"
-              :disabled="!inStock"
-              :class="{ disabledButton: !inStock }"
-              class="add-to-cart">
-        Add to cart
-      </button>
+      <div class="button-container">
+        <button @click="addToCart"
+                :disabled="!inStock"
+                :class="{ disabledButton: !inStock }"
+                class="add-to-cart">
+          Add to cart
+        </button>
+        <button @click="removeFromCart"
+                :disabled="!alreadyInCart"
+                :class="{ disabledButton: !alreadyInCart }"
+                class="remove-from-cart">
+          Remove from cart
+        </button>
+      </div>
 
     </div>
   </div>
@@ -76,18 +84,25 @@ Vue.component('product', {
       selectedVariant: 0,
       altText: "A pair of socks",
       href: "#",
+      alreadyInCart: false
     }
   },
   methods: {
     addToCart() {
-      app.cart += 1;
+      this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId);
+      this.isItemInCart();
     },
     removeFromCart() {
-      app.cart -= 1;
+      this.$emit('remove-from-cart', this.variants[this.selectedVariant].variantId);
+      this.isItemInCart();
     },
     updateProduct(index){
       this.selectedVariant = index;
     },
+    isItemInCart(){
+      this.user.cart.includes(this.variants[this.selectedVariant].variantId) ?
+        this.alreadyInCart = true : this.alreadyInCart = false;
+    }
   },
   computed: {
     title(){
@@ -115,12 +130,23 @@ Vue.component('product', {
 let app = new Vue({
   el: "#app",
   data: {
-    cart: 0,
     user: {
       fName: "Anastasia",
       lName: "Beaverhausen",
       active: true,
-      premium: true
+      premium: true,
+      cart: []
+    }
+  },
+  methods: {
+    updateCartAdd(id){
+      this.user.cart.push(id);
+    },
+    updateCartRemove(id){
+      const index = this.user.cart.indexOf(id);
+      if (index > -1) {
+        this.user.cart.splice(index, 1);
+      }
     }
   }
 });

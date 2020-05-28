@@ -68,15 +68,22 @@ body {
   border-radius: 5px;
 }
 
-.add-to-cart {
+.button-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.button-container > button {
   padding: 1em 1.5em;
+  margin-top: 1.5em;
+  cursor: pointer;
+}
+
+.add-to-cart {
   background-color: #1E95EA;
   border: none;
   color: white;
-  cursor: pointer;
-
-  align-self: center;
-  margin-top: 1.5em;
 }
 
 .disabledButton {

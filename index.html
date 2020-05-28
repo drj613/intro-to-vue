@@ -12,11 +12,11 @@
   <div id="app">
     <div class="nav-bar">
       <div class="cart">
-        <a href="#"><span>Cart ({{ cart }})</span></a>
+        <a href="#"><span>Cart ({{ user.cart.length }})</span></a>
       </div>
     </div>
 
-  <product :user="user"></product>
+  <product :user="user" @add-to-cart="updateCartAdd" @remove-from-cart="updateCartRemove"></product>
 
   </div>
 </body>
